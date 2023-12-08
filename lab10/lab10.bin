@@ -1,0 +1,30 @@
+; This is the file you will use for the lab assignment
+; Make sure to comment your code properly and don't exceed 
+; the line limitation for this assignment.  Good luck!
+
+0011 0001 0000 0000 ; x3100 - starting address of the program
+
+; The program description and code starts here
+
+; Zhang Kerui Dec.04 2023
+; This program is to sum all postive numbers in the given ten numbers
+
+; R3 store address
+; R4 loop variable
+; R5 sum the numbers
+; R6 read from memory
+
+; Initialization
+0101 101 101 1 00000 ; R5 <- (R5 & 0) reset R5
+0001 100 101 1 01010 ; R4 <- (R5 + 10) reset R4 to 10
+1110 011 000101111 ; reset R3 to 3132
+
+; loop
+0110 110 011 000000 ; 	R6 <- M[R3]	load the number from memory
+0000 110 000000001 ; 	if R6 is negative or zero, jump next instruction
+0001 101 101 0 00 110 ; R5 <- R5 + R6	add the number in sum(R5) 
+0001 011 011 1 00001 ; 	R3 <- R3 + 1	incrementing R3
+0001 100 100 1 11111 ;	R4 <- R4 - 1	decremneting R4
+0000 001 111111010 ;	if R4 > 0, go in the loop
+
+1111 0000 0010 0101 ; halt
