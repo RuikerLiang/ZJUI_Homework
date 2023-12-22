@@ -1,6 +1,0 @@
-*.obj
-.vscode
-test*
-*.sym
-myoutput
-myoutput.out
