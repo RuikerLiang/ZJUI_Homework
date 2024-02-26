@@ -1,58 +1,73 @@
-; The table below represents an 8x16 font.  For each 8-bit extended ASCII
-; character, the table uses 16 memory locations, each of which contains
-; 8 bits (the high 8 bits, for your convenience) marking pixels in the
-; line for that character.
+;	This program is to print a string starting from x5002 according to the font data
+;	The 0 in the font data will be printed as the charater in x5000
+;	The 1 in the font data will be printed as the charater in x5001
 
 .ORIG x3000
 
-; R1	x5000 0
-; R2	x5001 1
-; R3	x5002 
-; R4	TEMP
-; R5	Current Line
-; R6	Inner Loop register
+;	R0	Charater to be printed
+;	R1	Current number of the line to be printed (from 0 to 15)
+;	R3	Pointer of string
+;	R4	Out Loop Counter
+;	R5	Mul Loop Counter
+;			The address of font data to be printed
+;	R6	Character to be printed
 
-; Initialize
-LD R3, LOCATION	;
-ADD R1, R3, #0	;
-ADD R2, R3, #1	;
-LDR R3, R3, #2	;
+;	initialization
+LD R4, CONST_16	;
+AND R1, R1, #0	;
 
-; Calculate the address of the first line
-LD R4, CONST_4	;
-LOOP_MUL	ADD R3, R3, R3	;
-					ADD R4, R4, #-1	;
-					BRp LOOP_MUL	;
-LEA R4, FONT_DATA	;
-ADD R3, R3, R4	;
+;	Loop of the line to output
+LOOP_OUT
+	LD R3, LOCATION_5002	; initialize 
+	; Loop to search which which line in the font data to output
+	LOOP_SEQUENCE
+		LDR R6, R3, #0	;
+		BRz NEXT_LINE	;	if we read NUL which means the end of string
+		ADD R3, R3, #1	;	Change to next charater in string
+		; R6 <- R6 * 16 + FONT_DATA
+		LD R5, CONST_4
+		LOOP_MUL
+			ADD R6, R6, R6	;
+			ADD R5, R5, #-1	;
+			BRp LOOP_MUL	;
+		LEA R5, FONT_DATA	;
+		ADD R6, R5, R6	;
+		ADD R6, R1, R6	;	The outerloop determine which line of every charaters to be printed
+		LDR R5, R6, #0	;	store the line to be printed in R5
 
-					LD R4, CONST_16	;
-LOOP_OUT	LDR R5, R3, #0	;
-					LD R6, CONST_8	;
-	LOOP_INER	AND R5, R5, #-1	;
-						BRn NEGA	;
-						LDR R0, R1, #0	;
-						JSR #1	;
-	NEGA			LDR R0, R2, #0	;
-						TRAP x21	;
-						ADD R5, R5, R5	;
-						ADD R6, R6, #-1	;
-						BRp LOOP_INER	;
-					; New Line 
-					LD R0, ENTER	;
-					TRAP x21	;
-					ADD R3, R3, #1	;
-					ADD R4, R4, #-1	;
-					BRp LOOP_OUT	;
+		LD R6, CONST_8	;
+		; Loop to output column
+		LOOP_INER
+			AND R5, R5, #-1	;	To set cc
+			;	Check if the most significant number is 1 or 0 
+			LDI R0, LOCATION_5001	;
+			AND R5, R5, #-1	;	To set cc
+			BRn NEGA	;
+			LDI R0, LOCATION_5000	;
+			NEGA
+			TRAP x21	;
+			ADD R5, R5, R5	;	Current line shift left one bit to move to next charater 
+			ADD R6, R6, #-1	;
+			BRp LOOP_INER	;
+		BR LOOP_SEQUENCE
+	; Start A New Line 
+	NEXT_LINE
+	LD R0, ENTER	;
+	TRAP x21	;
+	ADD R1, R1, #1	;	Move to the next line in every charater
+	ADD R4, R4, #-1	;
+	BRp LOOP_OUT	;
 
-TRAP x25	;
+TRAP x25	;	Halt
 
-LOCATION .FILL x5000	;
-CONST_MINUS_A .FILL xFFBF	;
 CONST_16 .FILL x0010	;
 CONST_8	.FILL x0008	;
 CONST_4	.FILL x0004	;
 ENTER .FILL x000A	;
+LOCATION_5000 .FILL x5000	;
+LOCATION_5001 .FILL x5001	;
+LOCATION_5002 .FILL x5002	;
+
 FONT_DATA
 	.FILL	x0000
 	.FILL	x0000

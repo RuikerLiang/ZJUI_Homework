@@ -1,0 +1,15 @@
+Question 1: Describe the errors that occur when trying to assemble lab11.asm. Identify the cause of each error.
+1. Lack of .ORIG sign.										line 14 
+2. Incorrect PCoffset for load operation	line 17
+3. One extra comma.												line 19
+4. Lack of .END sign											line 42
+5. Incorrect PCoffset for load operation	line 30
+6. Incorrect order of n and z. 						line 32
+7. Incorrect PCoffset for store operation	line 35
+Question 2: For each label in the code, write down the corresponding memory location. 
+OUTERLOOP	x3004
+INNERLOOP	x3005
+INPUT			x300E
+RESULT		x3011
+Question 3: Between using labels and explicit memory locations/offsets, which one makes the most sense, and why?
+Labels. Because labels can describe what's this line for. It is also easy to use in instruction than the offset calculation.

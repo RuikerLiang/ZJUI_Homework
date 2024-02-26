@@ -1,0 +1,19 @@
+// Symbol table
+// Scope level 0:
+//	Symbol Name       Page Address
+//	----------------  ------------
+//	LOOP_OUT          3002
+//	LOOP_SEQUENCE     3003
+//	LOOP_MUL          3007
+//	LOOP_INER         300F
+//	NEGA              3014
+//	NEXT_LINE         3019
+//	CONST_16          301F
+//	CONST_8           3020
+//	CONST_4           3021
+//	ENTER             3022
+//	LOCATION_5000     3023
+//	LOCATION_5001     3024
+//	LOCATION_5002     3025
+//	FONT_DATA         3026
+
