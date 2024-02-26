@@ -1,2 +1,2 @@
-# ECElab
-This is the labs in Zhejiang University ECE120 course.
+# ZJUI_Homework
+This is the homework from ZJUI ECE
