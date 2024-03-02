@@ -1,0 +1,9 @@
+// Symbol table
+// Scope level 0:
+//	Symbol Name       Page Address
+//	----------------  ------------
+//	THEHALT           3F8B
+//	SUB_NUM           3F8C
+//	ENTRY             3F8D
+//	BITS              3F8E
+

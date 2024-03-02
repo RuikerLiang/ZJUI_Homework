@@ -1,0 +1,30 @@
+// Symbol table
+// Scope level 0:
+//	Symbol Name       Page Address
+//	----------------  ------------
+//	ANSWER_OK         300F
+//	R0_OK             3016
+//	R2_OK             301D
+//	BITS              301E
+//	INPUT             301F
+//	EXPECT            3020
+//	ANSWER_WRONG      3021
+//	R0_BAD            304F
+//	R2_BAD            3068
+//	FIND_PARENT       3081
+//	LOOP_DIVISION     3085
+//	TMP_R0            308C
+//	TMP_R7            308D
+//	FILL_STACK        308E
+//	LOOP_FILL_STACK   3094
+//	TABLE             309E
+//	TMP_R1            309F
+//	TMP_R2            30A0
+//	END               30A1
+//	PRINT_PATH        30A2
+//	LOOP_PRINT        30AB
+//	END_PRINT         30B4
+//	LINK              30BA
+//	TRANS             30BD
+//	ENDL              30BE
+
