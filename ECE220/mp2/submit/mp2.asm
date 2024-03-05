@@ -226,7 +226,7 @@ GET_CLOSEST
 	LDI R4, HEAP_SIZE	;
 	ADD R0, R4, #-1	;
 	;	if the heap is not empty
-	BRnz GC_DONE
+	BRn GC_DONE
 		;	R0 = first element
 		LDI R0, HEAP	;
 		;	set heap index of R0 to -1
