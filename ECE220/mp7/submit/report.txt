@@ -1,0 +1,2 @@
+1. Reverse
+bug: variable rest is used before initailzed when *s == '\0'

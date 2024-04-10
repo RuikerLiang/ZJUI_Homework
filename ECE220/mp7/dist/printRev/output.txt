@@ -1,0 +1,64 @@
+9 8 7 6 5 4 3 2 1 0
+What's on the stack now?
+
+"114514" reversed is "415411" (length 6)
+9 8 7 6 5 4 3 2 1 0
+What's on the stack now?
+
+"1" reversed is "1" (length 1)
+9 8 7 6 5 4 3 2 1 0
+What's on the stack now?
+
+"1" reversed is "1" (length 1)
+9 8 7 6 5 4 3 2 1 0
+What's on the stack now?
+
+"1" reversed is "1" (length 1)
+9 8 7 6 5 4 3 2 1 0
+What's on the stack now?
+
+"1" reversed is "1" (length 1)
+9 8 7 6 5 4 3 2 1 0
+What's on the stack now?
+
+"1" reversed is "1" (length 1)
+9 8 7 6 5 4 3 2 1 0
+What's on the stack now?
+
+"1" reversed is "1" (length 1)
+9 8 7 6 5 4 3 2 1 0
+What's on the stack now?
+
+"1" reversed is "1" (length 1)
+9 8 7 6 5 4 3 2 1 0
+What's on the stack now?
+
+"11" reversed is "11" (length 2)
+9 8 7 6 5 4 3 2 1 0
+What's on the stack now?
+
+"1" reversed is "1" (length 1)
+9 8 7 6 5 4 3 2 1 0
+What's on the stack now?
+
+"1" reversed is "1" (length 1)
+9 8 7 6 5 4 3 2 1 0
+What's on the stack now?
+
+"1" reversed is "1" (length 1)
+9 8 7 6 5 4 3 2 1 0
+What's on the stack now?
+
+"1" reversed is "1" (length 1)
+9 8 7 6 5 4 3 2 1 0
+What's on the stack now?
+
+"2" reversed is "2" (length 1)
+9 8 7 6 5 4 3 2 1 0
+What's on the stack now?
+
+"23" reversed is "32" (length 2)
+9 8 7 6 5 4 3 2 1 0
+What's on the stack now?
+
+"42" reversed is "24" (length 2)

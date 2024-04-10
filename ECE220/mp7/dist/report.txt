@@ -1,0 +1,154 @@
+PUT YOUR MP7 REPORT IN THIS FILE.
+1. printRev
+	Indentifying:
+		1)
+		Input: 3444
+		Correct Output:
+			9 8 7 6 5 4 3 2 1 0
+			What's on the stack now?
+
+			"3444" reversed is "4443" (length 4)
+
+		Actual Output:
+			9 8 7 6 5 4 3 2 1 0
+			What's on the stack now?
+
+			"3444" reversed is "4443" (length 32769)
+
+		2)
+		Input: 3230
+		Correct Output:
+			9 8 7 6 5 4 3 2 1 0
+			What's on the stack now?
+
+			"3230" reversed is "0323" (length 4)
+			
+		Actual Output:
+			9 8 7 6 5 4 3 2 1 0
+			What's on the stack now?
+
+			"3230" reversed is "0323" (length 32770)
+		3)
+		Input: 3238
+		Correct Output:
+			9 8 7 6 5 4 3 2 1 0
+			What's on the stack now?
+
+			"3238" reversed is "8323" (length 4)
+		Actual Output:
+			9 8 7 6 5 4 3 2 1 0
+			What's on the stack now?
+
+			"3238" reversed is "8323" (length 32771)
+		4)
+		Input:
+		Correct Output:
+			9 8 7 6 5 4 3 2 1 0
+			What's on the stack now?
+
+			"32399" reversed is "99323" (length 5)
+		Actual Output:
+			9 8 7 6 5 4 3 2 1 0
+			What's on the stack now?
+
+			"32399" reversed is "99323" (length 5)
+	Trace:
+		(gdb) b 34
+		(gdb) r 1
+		Breakpoint 1, main (argc=2, argv=0x7fffffffd848) at prmain.c:34
+		34              printf ("\" (length %d)\n", print_reverse (argv[i]));
+		(gdb) s
+		print_reverse (s=0x7fffffffdca5 "1") at pr_buggy.c:40
+		40          if ('\0' == *s) {
+		(gdb) s
+		45          rest = print_reverse (s + 1);
+		(gdb) s
+		print_reverse (s=0x7fffffffdca6 "") at pr_buggy.c:40
+		40          if ('\0' == *s) {
+		(gdb) s
+		41              return rest;
+		(gdb) p rest
+		$2 = 32767
+		(gdb)
+		
+		From the gdb process
+		The value in 'rest' is not suitable
+
+
+	Analysis:
+		bug: variable rest is used before initailzed when *s == '\0'
+	Fix:
+		initailze rest as 0
+
+
+2. primeNumber
+	Indentifying:
+		Correct Output:
+			(gdb) r
+			2 is prime.
+			3 is prime.
+			5 is prime.
+			7 is prime.
+			11 is prime.
+			13 is prime.
+			17 is prime.
+			19 is prime.
+			...
+		Actual Output:
+			(gdb) r
+			2 is prime.
+			3 is prime.
+			4 is prime.
+			5 is prime.
+			7 is prime.
+			9 is prime.
+			11 is prime.
+			13 is prime.
+			17 is prime.
+			19 is prime.
+			...
+			
+		4 is not a prime
+	Trace:
+		gdb-peda$ disass is_prime
+	 0x00005555555551af <+0>:	push   rbp
+	 0x00005555555551b0 <+1>:	mov    rbp,rsp
+	 0x00005555555551b3 <+4>:	sub    rsp,0x20
+	 0x00005555555551b7 <+8>:	mov    DWORD PTR [rbp-0x14],edi
+	 0x00005555555551ba <+11>:	mov    DWORD PTR [rbp-0x4],0x2
+	 0x00005555555551c1 <+18>:	jmp    0x5555555551e1 <is_prime+50>
+	 0x00005555555551c3 <+20>:	mov    edx,DWORD PTR [rbp-0x14]
+	 0x00005555555551c6 <+23>:	mov    eax,DWORD PTR [rbp-0x4]
+	 0x00005555555551c9 <+26>:	mov    esi,edx
+	 0x00005555555551cb <+28>:	mov    edi,eax
+	 0x00005555555551cd <+30>:	call   0x555555555185 <divides_evenly>
+	 0x00005555555551d2 <+35>:	test   eax,eax
+	 0x00005555555551d4 <+37>:	je     0x5555555551dd <is_prime+46>
+	 0x00005555555551d6 <+39>:	mov    eax,0x0
+	 0x00005555555551db <+44>:	jmp    0x5555555551f2 <is_prime+67>
+	 0x00005555555551dd <+46>:	add    DWORD PTR [rbp-0x4],0x1
+	 0x00005555555551e1 <+50>:	mov    eax,DWORD PTR [rbp-0x4]
+	 0x00005555555551e4 <+53>:	imul   eax,DWORD PTR [rbp-0x4]
+	 0x00005555555551e8 <+57>:	cmp    DWORD PTR [rbp-0x14],eax
+	 0x00005555555551eb <+60>:	jg     0x5555555551c3 <is_prime+20>
+	 0x00005555555551ed <+62>:	mov    eax,0x1
+	 0x00005555555551f2 <+67>:	leave
+	 0x00005555555551f3 <+68>:	ret
+
+	 When we enter the is_prime at check = 4
+	 In the is_prime(4), after it first reaches
+	 0x00005555555551e8 <+57>:	cmp    DWORD PTR [rbp-0x14],eax
+	 0x00005555555551eb <+60>:	jg     0x5555555551c3 <is_prime+20>
+	 it will go to
+	 0x00005555555551f3 <+68>:	ret
+	 and leave the function
+	
+	Analysis:
+		In the is_prime function, when set loop to check the number can be divided evenly by others, it use "i < number" as the condition instead of "i <= number"
+		This result to the sqaure number can not be detected since before check "divides_evenly(i, number)", it has gone out of the loop
+
+
+3. sort
+	Indentifying:
+
+
