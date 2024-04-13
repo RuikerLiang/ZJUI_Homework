@@ -9,7 +9,7 @@ OBJ := sortMain.o
 ALL: ${EXE}
 
 sort.o: sort.c ${HEADERS} Makefile
-	${CC} -c -Wall -o $@ $<
+	${CC} -c -g -Wall -o $@ $<
 
 ${EXE}: ${SOURCES} ${OBJ}
 	$(CC) ${CFLAGS} ${SOURCES} ${OBJ} -o ${EXE} ${LDFLAGS}
