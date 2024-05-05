@@ -1,0 +1,4 @@
+break mp9.c:22
+  condition $bpnum p->node[nnum].id==0x7fff
+
+set exec-wrapper logging enabled

@@ -1,0 +1,4 @@
+break mp9.c:230
+break mp9.c:233
+
+set exec-wrapper logging enabled

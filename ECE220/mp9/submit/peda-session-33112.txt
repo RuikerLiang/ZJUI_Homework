@@ -1,0 +1,3 @@
+break mp9main.c:611
+
+set exec-wrapper logging enabled

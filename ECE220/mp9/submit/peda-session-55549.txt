@@ -1,0 +1,4 @@
+break mp9.c:22
+  condition $bpnum vs->id[0]=0x7fff
+
+set exec-wrapper logging enabled
