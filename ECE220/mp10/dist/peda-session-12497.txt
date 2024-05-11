@@ -1,0 +1,3 @@
+break mp10match.c:109
+
+set exec-wrapper logging enabled

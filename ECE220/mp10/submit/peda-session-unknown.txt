@@ -1,0 +1,8 @@
+break mp10match.c:78
+  condition $bpnum r->uid==71 && i->uid == 68
+
+set exec-wrapper logging enabled
+
+set exec-wrapper logging enabled
+
+set exec-wrapper logging enabled

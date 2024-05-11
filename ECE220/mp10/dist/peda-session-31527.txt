@@ -1,0 +1,4 @@
+break mp10match.c:49
+  condition $bpnum r->uid == 71
+
+set exec-wrapper logging enabled

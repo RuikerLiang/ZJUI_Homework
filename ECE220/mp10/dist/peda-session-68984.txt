@@ -1,0 +1,4 @@
+break main
+break mp10main.c:482
+
+set exec-wrapper logging enabled
