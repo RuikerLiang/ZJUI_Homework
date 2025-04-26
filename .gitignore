@@ -17,3 +17,4 @@ lab_huffman/data
 *.mp4
 !**/myFloodFill.png
 !**/myFloodFill.gif.mp4
+**/Notes/*
